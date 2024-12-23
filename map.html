@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Interactivo</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        #map { width: 100%; height: 700px; }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        // Crear el mapa
+        var map = L.map('map', {
+            crs: L.CRS.Simple,
+            minZoom: -1,
+            maxZoom: 1
+        });
+
+        // Cargar la imagen del croquis
+        var bounds = [[0,0], [1500,4000]]; // Ajusta las dimensiones a la de tu imagen
+        var image = L.imageOverlay('/img/mapa.png', bounds).addTo(map);
+
+        map.fitBounds(bounds);
+         //Restauratne
+         var points = [
+            {
+                //restaurante
+                "lat": 700, // Coordenada Y del punto 1
+                "lng": 1800, // Coordenada X del punto 1
+                "title": "Punto 1",
+                "imgSrc": "/img/Restaurante.jpeg"
+            },
+            {
+                //Parque de agua
+                "lat": 400, // Coordenada Y del punto 2
+                "lng": 600, // Coordenada X del punto 2
+                "title": "Punto 2",
+                "imgSrc": "/img/Parque de agua.jpeg"
+            },
+            {
+                //cabañas
+                "lat": 100, // Coordenada Y del punto 2
+                "lng": 750, // Coordenada X del punto 2
+                "title": "Punto 2",
+                "imgSrc": "/img/Parque de agua.jpeg"
+            },
+            {
+                //Campin
+                "lat": 700, // Coordenada Y del punto 2
+                "lng": 1000, // Coordenada X del punto 2
+                "title": "Punto 2",
+                "imgSrc": "/img/Camping.jpg"
+            },
+            {
+                //energidas
+                "lat": 700, // Coordenada Y del punto 2
+                "lng": 2700, // Coordenada X del punto 2
+                "title": "Punto 2",
+                "imgSrc": "/img/energias.jpg"
+            },
+            {
+                //Hotel
+                "lat": 300, // Coordenada Y del punto 2
+                "lng": 1250, // Coordenada X del punto 2
+                "title": "Punto 2",
+                "imgSrc": "/img/Hotel.jpg"
+            },
+            {
+                //Casona
+                "lat": 500, // Coordenada Y del punto 2
+                "lng": 2400, // Coordenada X del punto 2
+                "title": "Punto 2",
+                "imgSrc": "/img/Casona.jpg"
+            }
+        ];
+
+       
+         // Añadir los marcadores y pop-ups a los puntos de interés
+        points.forEach(function(point) {
+            var marker = L.marker([point.lat, point.lng]).addTo(map);
+            marker.bindPopup("<b>" + point.title + "</b><br><img src='" + point.imgSrc + "' width='300' />");
+        });   
+        // Añadir puntos de referencia
+        var marker = L.marker([1000, 2500]).addTo(map); // Ajusta las coordenadas según tu imagen
+        marker.bindPopup("<b>Foto del área</b><br><img src='/img/mapa.png' width='200' />");
+    </script>
+</body>
+</html>
